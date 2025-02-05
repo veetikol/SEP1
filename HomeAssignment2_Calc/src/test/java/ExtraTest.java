@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class ExtraTest extends AbstractParent {
 
@@ -31,35 +33,26 @@ public class ExtraTest extends AbstractParent {
     public void testNollaa() {
         System.out.println("  Nollaa laskin.");
         laskin.nollaa();
-        assertEquals(0, laskin.annaTulos(), "Nollaus ei onnistunut");
+        assertEquals(0, laskin.annaTulos(), DELTA, "Nollaus ei onnistunut");
     }
 
-    @Test
-    public void testNelio2() {
-        laskin.nelio(2);
-        assertEquals(4, laskin.annaTulos(), "Luvun 2 Neliöön korotus väärin");
+    @ParameterizedTest
+    @ValueSource(ints = {2, 4, 5})
+    public void testNelio(int number) {
+        laskin.nelio(number);
+        assertEquals(number * number, laskin.annaTulos(), DELTA, "Luvun " + number + " neliöön korotus väärin");
     }
 
-    @Test
-    public void testNelio4() {
-        laskin.nelio(4);
-        assertEquals(16, laskin.annaTulos(),"Luvun 4 neliöön korotus väärin");
-    }
-
-    @Test
-    public void testNelio5() {
-        laskin.nelio(5);
-        assertEquals(25, laskin.annaTulos(), DELTA,"Luvun 5 neliöön korotus väärin");
-    }
     @Test
     public void testNeliojuuri2() {
         laskin.neliojuuri(2);
-		// Tähän assertXXX(), odotetun tuloksen tulee olla (int)Math.sqrt(2)
+        assertEquals((int) Math.sqrt(2), laskin.annaTulos(), DELTA, "Luvun 2 neliöjuuri väärin");
     }
-    
+
     @Test
     @DisplayName("Testaa negatiivinen neliöjuuri")
     public void testNeliojuuriNegat() {
-         fail("TESTIÄ EI OLE VIELÄ LAADITTU.");
+        laskin.neliojuuri(-2);
+        assertEquals(0, laskin.annaTulos(), DELTA, "Negatiivisen luvun neliöjuuri ei ole määritelty");
     }
 }
