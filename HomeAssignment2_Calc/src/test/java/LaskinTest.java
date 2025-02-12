@@ -28,7 +28,7 @@ public class LaskinTest { // Luokan nimen loppu pitää olla Test
     public void testLisaa() {
         laskin.lisaa(1);
         laskin.lisaa(2);
-        assertEquals(4, laskin.annaTulos(), "Lukujen 1 ja 2 summa väärin");
+        assertEquals(3, laskin.annaTulos(), "Lukujen 1 ja 2 summa väärin");
     }
 
     @Test
@@ -43,7 +43,7 @@ public class LaskinTest { // Luokan nimen loppu pitää olla Test
     public void testJaa() {
         laskin.lisaa(8);
         laskin.jaa(2);
-        assertEquals(5, laskin.annaTulos(), "Jakolasku 8/2 väärin");
+        assertEquals(4, laskin.annaTulos(), "Jakolasku 8/2 väärin");
     }
 
     // Testin oikea tulos on, että nollallajako heittää poikkeuksen,
